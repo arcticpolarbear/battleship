@@ -1,10 +1,11 @@
-import Board from "../factories/board";
+import Board from "../factories/board.js";
 
 describe("board functions", () => {});
 {
   let board;
 
   beforeEach(() => {
+    jest.clearAllMocks();
     board = new Board(10, 10, "player");
     board.fillBoard();
   });
@@ -41,12 +42,12 @@ describe("board functions", () => {});
   });
   it("should accept good vertical placement", () => {
     board.placeShip(55, 3, false);
-    console.log(board.placeShip(55, 3, false));
     expect(board.board[55].shipPresent).toEqual(true);
     expect(board.board[65].shipPresent).toEqual(true);
     expect(board.board[75].shipPresent).toEqual(true);
     expect(board.board[85].shipPresent).toEqual(false);
     board.placeShip(88, 2, false);
+    console.log(board.placeShip(88, 2, false));
     expect(board.board[88].shipPresent).toEqual(true);
     expect(board.board[98].shipPresent).toEqual(true);
   });

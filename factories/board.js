@@ -1,5 +1,3 @@
-import Ship from "./ship";
-
 class Board {
   constructor(width, height, owner) {
     this.width = width;
@@ -42,7 +40,7 @@ class Board {
     //uses integer multiple to check if shipLength exceeds column height
     //here "id" is checked against "totalSquares"
     let quotient = Math.floor(id / this.height);
-    if (id + shipLength * this.width > this.totalSquares) {
+    if (id + shipLength - 1 * this.width > this.totalSquares) {
       console.log("Total squares exceeded!");
       return false;
     }
@@ -64,17 +62,18 @@ class Board {
       for (let i = 0; i < shipLength; i++) {
         this.board[id + i].shipPresent = true;
       }
-      return;
+      return "Horizontal values written";
     }
     //all code below is for vertical placement
-    if (!this.verticalPossible(id, shipLength)) {
+    if (this.verticalPossible(id, shipLength) === false) {
       return "Impossible Placement";
     }
     //updates shipPresent value for vertically adjacent tiles
     for (let i = 0; i < shipLength; i++) {
       let currentIndex = id + this.width * i;
-      this.board[currentIndex] = true;
+      this.board[currentIndex].shipPresent = true;
     }
+    return "Vertical values written";
   }
 
   receiveAttack(id) {
