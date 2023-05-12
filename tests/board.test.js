@@ -22,4 +22,10 @@ describe("board functions", () => {});
     board.fillBoard();
     expect(board.board[99].id).toEqual(100);
   });
+
+  it("receiveAttack modify tile data", () => {
+    board.fillBoard();
+    board.receiveAttack(100);
+    expect(board.board[99].hit).toEqual(true);
+  });
 }
