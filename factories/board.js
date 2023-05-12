@@ -6,6 +6,7 @@ class Board {
     this.height = height;
     this.owner = owner;
     this.board = [];
+    this.totalSquares = width * height;
   }
 
   createSquare(id, shipPresent = false, hit = false) {
@@ -17,19 +18,22 @@ class Board {
   }
 
   fillBoard() {
-    let totalSquares = this.width * this.height;
-    for (let i = 0; i < totalSquares; i++) {
-      this.board.push(this.createSquare(i + 1));
+    for (let i = 0; i < this.totalSquares; i++) {
+      this.board.push(this.createSquare(i));
+    }
+  }
+
+  placeShip(id, isVertical) {
+    if (isVertical) {
     }
   }
 
   receiveAttack(id) {
-    let tile = this.board[id - 1]; //should be shallow copy
+    let tile = this.board[id]; //should be shallow copy
     if (tile.hit) {
       return "You have already attacked this target!";
     }
     tile.hit = true;
-    console.log(this.board[id - 1]);
     if (tile.shipPresent) {
       //need to get shipname and call shipName.hit
     } else {
